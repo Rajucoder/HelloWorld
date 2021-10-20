@@ -7,6 +7,10 @@ pipeline{
 				checkout scm
 			}
 		}
-		stage('Auto Tagging'){}
+		stage('Auto Tagging'){
+			steps{
+				echo "Tagging"
+			}
+		}
 	}
 }
