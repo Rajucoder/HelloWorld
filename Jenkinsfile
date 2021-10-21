@@ -1,7 +1,4 @@
 node {
-    // Clean workspace before doing anything
-    deleteDir()
-
     try {
         stage ('Clone') {
             def commitHash = checkout(scm).GIT_COMMIT
