@@ -1,10 +1,12 @@
 node {
     try {
         stage ('Clone') {
-            def commitHash = checkout(scm).GIT_COMMIT
-            bat "echo 'Commit hash is: ${commitHash}'"
-            bat "git tag -a release"
-	    bat "echo 'Tag create'"
+        def repoUrl = checkout(scm).GIT_URL
+	def key = repoUrl.tokenize('/')[3]
+	def slug = repoUrl.tokenize('/')[4]
+	slug = slug.substring(0, slug.lastIndexOf('.')) //Remove .git
+	echo "The projectKey is: ${key}"
+	echo "The repositorySlug is: ${slug}" 
         }
     } catch (err) {
         currentBuild.result = 'FAILED'
