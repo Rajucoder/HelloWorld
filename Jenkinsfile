@@ -1,21 +1,12 @@
 node {
     try {
         stage ('Clone') {
-            def commitHash = checkout(scm).GIT_COMMIT
-            bat "echo 'Commit hash is: ${commitHash}'"
-            println commitHash
-
-            def repName = checkout(scm).repoName
-            bat "echo 'Repository Name is: ${repName}'"
-            println repName
-
-            def rep = checkout(scm).repo
-            bat "echo 'Repository is: ${rep}'"
-            println rep
-
-            def nm = checkout(scm).name
-            bat "echo 'Name is: ${nm}'"
-            println nm
+            def repoUrl = checkout(scm).GIT_URL
+	    def key = repoUrl.tokenize('/')[3]
+	    def slug = repoUrl.tokenize('/')[4]
+            slug = slug.substring(0, slug.lastIndexOf('.'))
+	    bat 'echo "The projectKey is: ${key}"'
+	    bat 'echo "The repositorySlug is: ${slug}"'
         }
     } catch (err) {
         currentBuild.result = 'FAILED'
