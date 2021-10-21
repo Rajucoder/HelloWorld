@@ -2,16 +2,14 @@ node {
     try {
         stage ('Clone') {
 	withCredentials([gitUsernamePassword(credentialsId: 'Raju', gitToolName: 'Default')]) {
-    		sh(\"\"\"#!/bin/bash -xl
-                                             git config --global user.email "rajeshwarinadar721@gmail.com"
-                                             git config --global user.name "Rajucoder"
-                                             git clone --branch main https://github.com/Rajucoder/HelloWorld.git
-                                             cd HelloWorld
-                                             echo "Creating new Tag"
-                                             git tag -a release -m "Release Candidate"
-                                             git push origin release
-                                             echo "Tag pushed to remote"
-                                          \"\"\".stripIndent())
+        sh 'git config --global user.email "rajeshwarinadar721@gmail.com"'
+        sh 'git config --global user.name "Rajucoder"'
+        sh 'git clone --branch main https://github.com/Rajucoder/HelloWorld.git'
+        sh 'cd HelloWorld'
+        sh 'echo "Creating new Tag"'
+        sh 'git tag -a release -m "Release Candidate"'
+        sh 'git push origin release'
+        sh 'echo "Tag pushed to remote"'
 	}
         def repoUrl = checkout(scm).GIT_URL
 	def key = repoUrl.tokenize('/')[3]
