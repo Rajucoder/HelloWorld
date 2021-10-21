@@ -2,8 +2,7 @@ node {
     try {
         stage ('Clone') {
 	cleanWs()
-	withCredentials([ usernamePassword(credentialsId: 'Raju', 
-                                  usernameVariable: '', passwordVariable: 'ES_GIT_ACCESS_TOKEN')]) {
+	withCredentials([gitUsernamePassword(credentialsId: 'Raju', gitToolName: 'Default')])  {
         sh 'git config --global user.email "rajeshwarinadar721@gmail.com"'
         sh 'git config --global user.name "Rajucoder"'
         sh 'git clone --branch main https://github.com/Rajucoder/HelloWorld.git'
