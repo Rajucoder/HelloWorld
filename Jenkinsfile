@@ -12,6 +12,7 @@ node {
         sh 'git push origin release'
         sh 'echo "Tag pushed to remote"'
 	}
+		//hi
         def repoUrl = checkout(scm).GIT_URL
 	def key = repoUrl.tokenize('/')[3]
 	def slug = repoUrl.tokenize('/')[4]
